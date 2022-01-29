@@ -1,0 +1,1 @@
+from .vinted import Vinted

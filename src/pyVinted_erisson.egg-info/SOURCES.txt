@@ -1,0 +1,10 @@
+LICENSE
+README.md
+setup.py
+src/pyVinted/__init__.py
+src/pyVinted/vinted.py
+src/pyVinted_erisson.egg-info/PKG-INFO
+src/pyVinted_erisson.egg-info/SOURCES.txt
+src/pyVinted_erisson.egg-info/dependency_links.txt
+src/pyVinted_erisson.egg-info/requires.txt
+src/pyVinted_erisson.egg-info/top_level.txt
