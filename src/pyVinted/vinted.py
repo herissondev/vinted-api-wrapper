@@ -86,10 +86,10 @@ class Vinted:
         print(f"Getting cookies from {self.VINTED_URL}")
         try :
             response = self.session.get(self.VINTED_URL)
+            response.raise_for_status()
             cookies = self.session.cookies.get_dict()
             headers = dict({"user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.0 Safari/537.36"}, **cookies)
             self.session.headers.update(headers)
-            response.raise_for_status()
             print("Cookies set!")
 
         except Exception as e:

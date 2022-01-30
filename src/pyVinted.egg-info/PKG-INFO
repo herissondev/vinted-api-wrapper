@@ -1,19 +1,17 @@
 Metadata-Version: 2.1
-Name: pyVinted-erisson
-Version: 0.0.1
+Name: pyVinted
+Version: 0.0.2
 Summary: Vinted API wrapper for python
-Home-page: UNKNOWN
+Home-page: https://github.com/aime-risson/vinted-api-wrapper
 Author: Aimé Risson
 Author-email: aime.risson.1@gmail.fr
 License: UNKNOWN
 Keywords: python,Vinted api,Vinted API wrapper,python vinted
 Platform: UNKNOWN
-Classifier: Development Status :: 3 - Alpha
-Classifier: Intended Audience :: Education
-Classifier: Programming Language :: Python :: 2
 Classifier: Programming Language :: Python :: 3
-Classifier: Operating System :: MacOS :: MacOS X
-Classifier: Operating System :: Microsoft :: Windows
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Education
 Requires-Python: >=3.6
 Description-Content-Type: text/markdown
 License-File: LICENSE

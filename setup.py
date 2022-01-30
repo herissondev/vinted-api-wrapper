@@ -3,7 +3,7 @@ import setuptools
 
 
     
-VERSION = '0.0.1'
+VERSION = '0.0.2'
 DESCRIPTION = 'Vinted API wrapper for python'
 
 with open("README.md", "r", encoding="utf-8") as fh:
@@ -12,7 +12,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 # Setting up
 setup(
     # the name must match the folder name 'verysimplemodule'
-    name="pyVinted-erisson",
+    name="pyVinted",
     version=VERSION,
     author="Aimé Risson",
     author_email="aime.risson.1@gmail.fr",
@@ -30,4 +30,5 @@ setup(
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
     python_requires=">=3.6",
+    url = "https://github.com/aime-risson/vinted-api-wrapper"
 )
