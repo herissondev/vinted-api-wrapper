@@ -24,6 +24,20 @@ class Vinted:
         self.session = requests.Session()
         self.setCookies()
 
+    #used to retrieve cookies from vinted
+    def setCookies(self):
+        print(f"Getting cookies from {self.VINTED_URL}")
+        try :
+            response = self.session.get(self.VINTED_URL)
+            response.raise_for_status()
+            cookies = self.session.cookies.get_dict()
+            headers = dict({"user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.0 Safari/537.36"}, **cookies)
+            self.session.headers.update(headers)
+            print("Cookies set!")
+
+        except Exception as e:
+            print(f"There was an error fetching cookies for {self.VINTED_URL}\n Error : {e}")
+
 
     def parseUrl(self, url, nbrItems=20, page=1):
         '''
@@ -81,17 +95,9 @@ class Vinted:
         except Exception as e:
             print(f"Error : {e}")
 
+    
 
-    def setCookies(self):
-        print(f"Getting cookies from {self.VINTED_URL}")
-        try :
-            response = self.session.get(self.VINTED_URL)
-            response.raise_for_status()
-            cookies = self.session.cookies.get_dict()
-            headers = dict({"user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.0 Safari/537.36"}, **cookies)
-            self.session.headers.update(headers)
-            print("Cookies set!")
 
-        except Exception as e:
-            print(f"There was an error fetching cookies for {self.VINTED_URL}\n Error : {e}")
+    
         
+    
