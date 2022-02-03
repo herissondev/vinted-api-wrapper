@@ -1,6 +1,6 @@
 from urllib.parse import urlparse,parse_qsl
 import requests
-
+from .items.item import Item
 
 class Vinted:
     '''
@@ -90,6 +90,7 @@ class Vinted:
             
             response.raise_for_status()
             items = response.json()["items"]
+            return [Item(_item) for _item in items]
             return items
 
         except Exception as e:
