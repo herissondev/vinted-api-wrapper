@@ -1,5 +1,6 @@
 from datetime import datetime, timezone
-
+from pyVinted.requester import requester
+ 
 class Item:
     def __init__(self, data):
         self.id = data['id']
@@ -15,7 +16,8 @@ class Item:
         self.city = data['city']
         self.country = data['country']
         self.status_id = data['status_id']
+        self.url = f"{requester.VINTED_URL}/{data['path']}"
     
-    def isNewItem(self, delay=3):
-        delta = datetime.now(timezone.utc) - self.updated_at_ts
-        return delta.seconds < delay*60
+    def isNewItem(self, minutes=3):
+        delta = datetime.now(timezone.utc) - self.created_at_ts
+        return delta.seconds < minutes*60
