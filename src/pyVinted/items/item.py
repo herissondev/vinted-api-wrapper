@@ -16,7 +16,7 @@ class Item:
         self.city = data['city']
         self.country = data['country']
         self.status_id = data['status_id']
-        self.url = f"{requester.VINTED_URL}/{data['path']}"
+        self.url = f"{requester.VINTED_URL}{data['path']}"
     
     def isNewItem(self, minutes=3):
         delta = datetime.now(timezone.utc) - self.created_at_ts
