@@ -6,6 +6,7 @@ class Item:
         self.id = data['id']
         self.title = data['title']
         self.brand_title = data['brand_title']
+        self.size_title = data["size_title"]
         self.currency = data['currency']
         self.price = data['price']
         self.photo = data['photo']['url']
