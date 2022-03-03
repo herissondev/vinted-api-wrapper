@@ -11,6 +11,6 @@ class Item:
         self.photo = data['photo']['url']
         self.url = data['url']
     
-    def isNewItem(self, minutes=3):
-        delta = datetime.now(timezone.utc) - self.created_at_ts
-        return delta.seconds < minutes*60
+    #def isNewItem(self, minutes=3):
+      #  delta = datetime.now(timezone.utc) - self.created_at_ts
+       # return delta.seconds < minutes*60
