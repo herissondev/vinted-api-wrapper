@@ -20,6 +20,10 @@ class Vinted:
         """
         requester.setCookies(domain)
         self.items = Items()
+    
+    # def login(self,username,password):
+    #     requester.login(username=username, password=password)
+    #     requester.message()
         
 
     

@@ -3,7 +3,7 @@ import setuptools
 
 
     
-VERSION = '0.0.2'
+VERSION = '0.3.0'
 DESCRIPTION = 'Vinted API wrapper for python'
 
 with open("README.md", "r", encoding="utf-8") as fh:

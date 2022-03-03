@@ -2,9 +2,14 @@ LICENSE
 README.md
 setup.py
 src/pyVinted/__init__.py
+src/pyVinted/requester.py
+src/pyVinted/settings.py
 src/pyVinted/vinted.py
 src/pyVinted.egg-info/PKG-INFO
 src/pyVinted.egg-info/SOURCES.txt
 src/pyVinted.egg-info/dependency_links.txt
 src/pyVinted.egg-info/requires.txt
 src/pyVinted.egg-info/top_level.txt
+src/pyVinted/items/__init__.py
+src/pyVinted/items/item.py
+src/pyVinted/items/items.py
