@@ -42,7 +42,7 @@ class Items:
         querys = parse_qsl(urlparse(url).query)
         params = {
 
-                    'search_text': ','.join(map(str, [tpl[1] for tpl in querys if tpl[0] == 'search_text'])),
+                    'search_text': '+'.join(map(str, [tpl[1] for tpl in querys if tpl[0] == 'search_text'])),
                     'catalog_ids': ','.join(map(str, [tpl[1] for tpl in querys if tpl[0] == 'catalog[]'])) ,
                     'color_ids': ','.join(map(str, [tpl[1] for tpl in querys if tpl[0] == 'color_id[]'])) ,
                     'brand_ids': ','.join(map(str, [tpl[1] for tpl in querys if tpl[0] == 'brand_id[]'])) ,
