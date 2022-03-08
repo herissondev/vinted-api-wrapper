@@ -11,7 +11,9 @@ class Item:
         self.price = data['price']
         self.photo = data['photo']['url']
         self.url = data['url']
+        self.created_at_ts = datetime.fromtimestamp(data['photo']['high_resolution']["timestamp"], tz=timezone.utc)
     
-    #def isNewItem(self, minutes=3):
-      #  delta = datetime.now(timezone.utc) - self.created_at_ts
-       # return delta.seconds < minutes*60
+    def isNewItem(self, minutes=3):
+        delta = datetime.now(timezone.utc) - self.created_at_ts
+        print(delta)
+        return delta.seconds < minutes*60
