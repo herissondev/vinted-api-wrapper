@@ -1,5 +1,6 @@
 import json
 import requests
+import aiotor
 from requests.exceptions import HTTPError
 
 class Requester:
@@ -18,6 +19,7 @@ class Requester:
         
 
         self.session = requests.Session()
+        self.pool = aiotor.start()
 
     def get(self, url, params=None):
         """
@@ -27,14 +29,15 @@ class Requester:
         :return: dict
             Json format
         """
-        response = self.session.get(url, headers=self.headers, params=params)
-        if response.status_code != 200:
-            raise HTTPError
-        if not response.content:
-            return None
-        data = json.loads(response.content)
-        
-        return data
+        with self.pool:
+            response = self.session.get(url, headers=self.headers, params=params)
+            if response.status_code != 200:
+                print(response.status_code)
+            if not response.content:
+                return None
+            data = json.loads(response.content)
+
+            return data
 
 
     # def post(self, url, params=None):
@@ -62,11 +65,13 @@ class Requester:
 
         print(f"Getting cookies from {self.VINTED_URL}")
         try :
-            response = self.session.get(self.VINTED_URL)
-            response.raise_for_status()
-            cookies = self.session.cookies.get_dict()
-            headers = dict({"user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.0 Safari/537.36"}, **cookies)
-            self.session.headers.update(headers)
+
+            with self.pool:
+                response = self.session.get(self.VINTED_URL)
+                response.raise_for_status()
+                cookies = self.session.cookies.get_dict()
+                headers = dict({"user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.0 Safari/537.36"}, **cookies)
+                self.session.headers.update(headers)
             # print(self.session.headers)
             # soup = BeautifulSoup(response.text, 'lxml')
             # csrf_token = soup.select_one('meta[name="csrf-token"]')['content'] 
