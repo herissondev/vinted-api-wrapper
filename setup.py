@@ -2,9 +2,8 @@ from setuptools import setup, find_packages
 import setuptools
 
 
-    
-VERSION = '0.3.3'
-DESCRIPTION = 'Vinted API wrapper for python'
+VERSION = "0.4"
+DESCRIPTION = "Vinted API wrapper for python"
 
 with open("README.md", "r", encoding="utf-8") as fh:
     LONG_DESCRIPTION = fh.read()
@@ -19,8 +18,8 @@ setup(
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
-    install_requires=['requests', 'toraio'],
-    keywords=['python', 'Vinted api', 'Vinted API wrapper', 'python vinted'],
+    install_requires=["requests"],
+    keywords=["python", "Vinted api", "Vinted API wrapper", "python vinted"],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
@@ -30,5 +29,5 @@ setup(
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
     python_requires=">=3.6",
-    url = "https://github.com/aime-risson/vinted-api-wrapper"
+    url="https://github.com/aime-risson/vinted-api-wrapper",
 )
