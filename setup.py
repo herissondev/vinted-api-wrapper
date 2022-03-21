@@ -3,7 +3,7 @@ import setuptools
 
 
     
-VERSION = '0.3.2'
+VERSION = '0.3.3'
 DESCRIPTION = 'Vinted API wrapper for python'
 
 with open("README.md", "r", encoding="utf-8") as fh:
@@ -19,7 +19,7 @@ setup(
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
-    install_requires=['requests'], 
+    install_requires=['requests', 'toraio'],
     keywords=['python', 'Vinted api', 'Vinted API wrapper', 'python vinted'],
     classifiers=[
         "Programming Language :: Python :: 3",
