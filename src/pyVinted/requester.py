@@ -1,5 +1,6 @@
 import json
 import requests
+import re
 from requests.exceptions import HTTPError
 
 
@@ -49,29 +50,33 @@ class Requester:
     #     return data
 
     def setCookies(self, domain):
-
+        """used to set cookies"""
         self.VINTED_URL = f"https://www.vinted.{domain}"
         self.VINTED_API_URL = f"https://www.vinted.{domain}/api/v2"
         self.VINTED_PRODUCTS_ENDPOINT = "catalog/items"
 
-        print(f"Getting cookies from {self.VINTED_URL}")
+        #regex to find _vinted_*** in set-cookie header
+        p = re.compile('(?=_vinted_)(.*?);')
+
+
         try:
             response = self.session.get(self.VINTED_URL)
             response.raise_for_status()
-            cookies = self.session.cookies.get_dict()
-            headers = dict(
-                {
-                    "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.0 Safari/537.36"
-                },
-                **cookies,
-            )
-            self.session.headers.update(headers)
-            # print(self.session.headers)
-            # soup = BeautifulSoup(response.text, 'lxml')
-            # csrf_token = soup.select_one('meta[name="csrf-token"]')['content']
-            # self.session.headers["X-Csrf-Token"] = csrf_token
-            # self.session.headers["Content-Type"] = "application/json"
-            # self.session.headers["Host"] = "www.vinted.fr"
+
+            cookies = response.headers["set-cookie"]
+
+            #creating vinted_session cookie
+            vinted_session = p.search(cookies).group()
+            vinted_session = vinted_session.replace(";", "")
+            vinted_session = vinted_session.split("=")
+            vinted_session = {vinted_session[0]: vinted_session[1]}
+
+            #retrieving old cookies from session
+            old_cookies = self.session.cookies.get_dict()
+
+            new_cookies = dict(vinted_session, **old_cookies)
+
+            self.session.cookies.update(new_cookies)
 
             print("Cookies set!")
 
