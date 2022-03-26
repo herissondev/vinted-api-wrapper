@@ -13,7 +13,7 @@ class Vinted:
     The items are then be returned in a json format
     """
 
-    def __init__(self, domain="fr", proxy=None):
+    def __init__(self, domain="fr", proxy=None, gateway=None):
         """
         Args:
             domain (str): Domain to be used, example: "fr" for France, "de" for Germany...
@@ -21,6 +21,9 @@ class Vinted:
         """
         if proxy is not None:
             requester.session.proxies.update(proxy)
+
+        if gateway is not None:
+            requester.session.mount("https://www.vinted.fr", gateway)
 
         requester.setCookies(domain)
         self.items = Items()
