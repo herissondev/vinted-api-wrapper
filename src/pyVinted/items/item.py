@@ -16,7 +16,14 @@ class Item:
             data["photo"]["high_resolution"]["timestamp"], tz=timezone.utc
         )
 
+    def __eq__(self, other):
+        return self.id == other.id
+
+    def __hash__(self):
+        return hash(('id', self.id))
+
     def isNewItem(self, minutes=3):
         delta = datetime.now(timezone.utc) - self.created_at_ts
         print(delta)
         return delta.seconds < minutes * 60
+
