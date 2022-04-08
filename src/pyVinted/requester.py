@@ -76,9 +76,9 @@ class Requester:
         #regex to find _vinted_*** in set-cookie header
         p = re.compile('(?=_vinted_)(.*?);')
 
-        headers = {}
-        headers["user-agent"] = random.choice(USER_AGENTS)
-        self.session.headers = headers
+
+        self.headers["user-agent"] = random.choice(USER_AGENTS)
+        self.session.headers = self.headers
 
         try:
             response = self.session.get(self.VINTED_URL)
