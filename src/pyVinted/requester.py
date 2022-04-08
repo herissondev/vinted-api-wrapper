@@ -1,8 +1,26 @@
 import json
 import requests
 import re
+import random
 from requests.exceptions import HTTPError
 
+
+USER_AGENTS = [
+    "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) "
+    "Chrome/13.0.782.112 Safari/535.1",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.22 (KHTML, like Gecko) "
+    "Ubuntu Chromium/25.0.1364.160 Chrome/25.0.1364.160 Safari/537.22",
+    "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.6b) "
+    "Gecko/20031212 Firebird/0.7+",
+    "Mozilla/5.0 (Windows NT 5.1; rv:5.0.1) Gecko/20100101 Firefox/5.0.1",
+    "Mozilla/5.0 (X11; U; Linux x86; fr-fr) Gecko/20100423 "
+    "Ubuntu/10.04 (lucid) Firefox/3.6.3 AppleWebKit/532.4 Safari/532.4",
+    "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.0; Trident/5.0)",
+    "Mozilla/4.0 (compatible; MSIE 6.0; MSIE 5.5; Windows NT 5.0) "
+    "Opera 7.02 Bork-edition [en]",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) "
+    "AppleWebKit/536.30.1 (KHTML, like Gecko) Version/6.0.5 Safari/536.30.1",
+]
 
 class Requester:
     def __init__(self):
@@ -58,6 +76,9 @@ class Requester:
         #regex to find _vinted_*** in set-cookie header
         p = re.compile('(?=_vinted_)(.*?);')
 
+        headers = {}
+        headers["user-agent"] = random.choice(USER_AGENTS)
+        self.session.headers = headers
 
         try:
             response = self.session.get(self.VINTED_URL)
