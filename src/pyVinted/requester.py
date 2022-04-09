@@ -14,7 +14,7 @@ class Requester:
     def __init__(self):
         self.session = requests.Session()
         self.session.headers.update(HEADERS)
-
+        #self.setCookies()
 
 
     def get(self, url, params=None):

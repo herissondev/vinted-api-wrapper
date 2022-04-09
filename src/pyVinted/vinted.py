@@ -19,13 +19,16 @@ class Vinted:
             domain (str): Domain to be used, example: "fr" for France, "de" for Germany...
 
         """
+        requester.setCookies(domain)
+
+
         if proxy is not None:
             requester.session.proxies.update(proxy)
 
         if gateway is not None:
             requester.session.mount("https://www.vinted.fr", gateway)
 
-        requester.setCookies(domain)
+
         self.items = Items()
 
     # def login(self,username,password):
