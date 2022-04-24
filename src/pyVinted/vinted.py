@@ -10,7 +10,7 @@ class Vinted:
     This class is built to connect with the pyVinted API.
 
     It's main goal is to be able to retrieve items from a given url search.\n
-    The items are then be returned in a json format
+    The items are then returned in a json format
     """
 
     def __init__(self, domain="fr", proxy=None, gateway=None):
@@ -19,18 +19,17 @@ class Vinted:
             domain (str): Domain to be used, example: "fr" for France, "de" for Germany...
 
         """
-        requester.setCookies(domain)
-
 
         if proxy is not None:
             requester.session.proxies.update(proxy)
 
-        if gateway is not None:
-            requester.session.mount("https://www.vinted.fr", gateway)
+        elif gateway is not None:
+            requester.setCookies(domain=domain,gateway=gateway)
+            #requester.session.mount("https://www.vinted.fr", gateway)
+        else:
+            requester.setCookies(domain=domain)
 
 
         self.items = Items()
 
-    # def login(self,username,password):
-    #     requester.login(username=username, password=password)
-    #     requester.message()
+

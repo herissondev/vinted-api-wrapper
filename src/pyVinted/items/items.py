@@ -21,8 +21,13 @@ class Items:
         params = self.parseUrl(url, nbrItems, page)
         url = f"{requester.VINTED_API_URL}/{requester.VINTED_PRODUCTS_ENDPOINT}"
         response = requester.get(url=url, params=params)
-        items = response["items"]
-        return [Item(_item) for _item in items]
+
+        if response.status_code == 200:
+            items = response.json()["items"]
+            return [Item(_item) for _item in items]
+        else:
+            print("Error while retriving items")
+            return
 
     def parseUrl(self, url, nbrItems=20, page=1):
         """
