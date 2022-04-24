@@ -21,6 +21,7 @@ class Requester:
     def __init__(self):
         self.session = requests.Session()
         self.session.headers.update(HEADERS)
+        self.gateway = None
         #self.setCookies()
 
 
@@ -64,9 +65,13 @@ class Requester:
 
         try:
             if gateway is None:
-                self.post(self.VINTED_AUTH_URL)
-                print("Cookies set!")
+                if self.gateway is not None:
+                    self.session.adapters.pop("https://www.vinted.fr")
+                    self.post(self.VINTED_AUTH_URL)
+                    print("Cookies set!")
+                    self.session.mount("https://www.vinted.fr", self.gateway)
             else:
+                self.gateway = gateway
                 self.post(self.VINTED_AUTH_URL)
                 self.session.mount("https://www.vinted.fr", gateway)
                 print("Cookies set!")
