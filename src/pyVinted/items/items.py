@@ -4,8 +4,6 @@ from urllib.parse import urlparse, parse_qsl
 from requests.exceptions import HTTPError
 from typing import List, Dict
 class Items:
-    def __init__(self):
-        pass
 
     def search(self, url, nbrItems: int = 20, page: int =1) -> List[Item]:
         """
@@ -17,19 +15,23 @@ class Items:
             page (int): Page number to be returned (default 1).
 
         """
-
+        VINTED_API_URL = f"https://www.vinted.fr/api/v2"
+        VINTED_PRODUCTS_ENDPOINT = "catalog/items"
         params = self.parseUrl(url, nbrItems, page)
-        url = f"{requester.VINTED_API_URL}/{requester.VINTED_PRODUCTS_ENDPOINT}"
-        response = requester.get(url=url, params=params)
-
-        if response.status_code == 200:
-            items = response.json()["items"]
+        url = f"{VINTED_API_URL}/{VINTED_PRODUCTS_ENDPOINT}"
+        print(url)
+        try:
+            response = requester.get(url=url, params=params)
+            response.raise_for_status()
+            items = response.json()
+            items = items["items"]
             return [Item(_item) for _item in items]
-        else:
-            print("Error while retriving items")
-            return
 
-    def parseUrl(self, url, nbrItems=20, page=1):
+        except HTTPError as err:
+            raise err
+
+
+    def parseUrl(self, url, nbrItems=20, page=1) -> Dict:
         """
         Parse Vinted search url to get parameters the for api call.
 
@@ -40,6 +42,7 @@ class Items:
 
         """
         querys = parse_qsl(urlparse(url).query)
+
         params = {
             "search_text": "+".join(
                 map(str, [tpl[1] for tpl in querys if tpl[0] == "search_text"])
