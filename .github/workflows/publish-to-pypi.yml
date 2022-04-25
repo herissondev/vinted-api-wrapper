@@ -53,7 +53,7 @@ name: Upload Python Package 🐍 distributions 📦 to PyPI
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
