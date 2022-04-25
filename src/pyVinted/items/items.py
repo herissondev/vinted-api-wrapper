@@ -1,13 +1,13 @@
 from pyVinted.items.item import Item
 from pyVinted.requester import requester
 from urllib.parse import urlparse, parse_qsl
-
-
+from requests.exceptions import HTTPError
+from typing import List, Dict
 class Items:
     def __init__(self):
         pass
 
-    def search(self, url, nbrItems=20, page=1):
+    def search(self, url, nbrItems: int = 20, page: int =1) -> List[Item]:
         """
         Retrieves items from a given search url on vited.
 
