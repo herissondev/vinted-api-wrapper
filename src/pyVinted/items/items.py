@@ -3,6 +3,7 @@ from pyVinted.requester import requester
 from urllib.parse import urlparse, parse_qsl
 from requests.exceptions import HTTPError
 from typing import List, Dict
+from pyVinted.settings import Urls
 class Items:
 
     def search(self, url, nbrItems: int = 20, page: int =1) -> List[Item]:
@@ -15,11 +16,10 @@ class Items:
             page (int): Page number to be returned (default 1).
 
         """
-        VINTED_API_URL = f"https://www.vinted.fr/api/v2"
-        VINTED_PRODUCTS_ENDPOINT = "catalog/items"
+
         params = self.parseUrl(url, nbrItems, page)
-        url = f"{VINTED_API_URL}/{VINTED_PRODUCTS_ENDPOINT}"
-        print(url)
+        url = f"{Urls.VINTED_API_URL}/{Urls.VINTED_PRODUCTS_ENDPOINT}"
+
         try:
             response = requester.get(url=url, params=params)
             response.raise_for_status()
