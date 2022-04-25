@@ -11,7 +11,7 @@ pip install pyVinted
 ```py
 from pyVinted import Vinted
 
-vinted = Vinted("fr")
+vinted = Vinted()
 
 # search(url, number_of_items, page_number)
 items = vinted.items.search("https://www.vinted.fr/vetement?order=newest_first&price_to=60&currency=EUR",10,1)
