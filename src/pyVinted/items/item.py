@@ -4,10 +4,14 @@ from pyVinted.requester import requester
 
 class Item:
     def __init__(self, data):
+        self.raw_data = data
         self.id = data["id"]
         self.title = data["title"]
         self.brand_title = data["brand_title"]
-        self.size_title = data["size_title"]
+        try:
+            self.size_title = data["size_title"]
+        except:
+            self.size_title = data["size_title"]
         self.currency = data["currency"]
         self.price = data["price"]
         self.photo = data["photo"]["url"]
