@@ -13,15 +13,12 @@ HEADERS = {
 
 MAX_RETRIES = 3
 class Requester:
-    VINTED_URL = f"https://www.vinted.fr"
-    VINTED_AUTH_URL = f"https://www.vinted.fr/auth/token_refresh"
-    VINTED_API_URL = f"https://www.vinted.fr/api/v2"
-    VINTED_PRODUCTS_ENDPOINT = "catalog/items"
+
 
     def __init__(self):
         self.session = requests.Session()
         self.session.headers.update(HEADERS)
-        self.gateway = None
+        self.VINTED_AUTH_URL = f"https://www.vinted.fr/auth/token_refresh"
         #self.setCookies()
 
 
@@ -38,46 +35,36 @@ class Requester:
         while tried < MAX_RETRIES:
             tried += 1
             with self.session.get(url, params=params) as response:
-                print(response.content)
-                if response.status_code == 401:
-                    self.setCookies()
-                    continue
 
-                if response.status_code == 200:
+                if response.status_code == 401 and tried < MAX_RETRIES:
+                    print(f"Cokkies invalid retrying {tried}/{MAX_RETRIES}")
+                    self.setCookies()
+
+                elif response.status_code == 200 or tried == MAX_RETRIES:
                     return response
 
-            return response
+
+        return HTTPError
 
     def post(self,url, params=None):
         response = self.session.post(url, params)
         response.raise_for_status()
         return response
 
-    def setCookies(self, domain="fr", gateway=None):
-        """used to set cookies"""
-        self.VINTED_URL = f"https://www.vinted.{domain}"
-        self.VINTED_AUTH_URL = f"https://www.vinted.{domain}/auth/token_refresh"
-        self.VINTED_API_URL = f"https://www.vinted.{domain}/api/v2"
-        self.VINTED_PRODUCTS_ENDPOINT = "catalog/items"
+    def setCookies(self):
+
 
         self.session.cookies.clear_session_cookies()
 
 
         try:
-            if gateway is None:
-                if self.gateway is not None:
-                    self.session.adapters.pop("https://www.vinted.fr")
-                    self.post(self.VINTED_AUTH_URL)
-                    print("Cookies set!")
-                    self.session.mount("https://www.vinted.fr", self.gateway)
-            else:
-                self.gateway = gateway
-                self.post(self.VINTED_AUTH_URL)
-                self.session.mount("https://www.vinted.fr", gateway)
-                print("Cookies set!")
+
+            self.post(self.VINTED_AUTH_URL)
+            print("Cookies set!")
+
         except Exception as e:
             print(
-                f"There was an error fetching cookies for {self.VINTED_URL}\n Error : {e}"
+                f"There was an error fetching cookies for vinted\n Error : {e}"
             )
 
     # def login(self,username,password=None):
