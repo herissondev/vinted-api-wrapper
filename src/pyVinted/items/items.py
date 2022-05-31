@@ -6,7 +6,7 @@ from typing import List, Dict
 from pyVinted.settings import Urls
 class Items:
 
-    def search(self, url, nbrItems: int = 20, page: int =1) -> List[Item]:
+    def search(self, url, nbrItems: int = 20, page: int =1, time: int = None, json: bool = False) -> List[Item]:
         """
         Retrieves items from a given search url on vited.
 
@@ -17,7 +17,7 @@ class Items:
 
         """
 
-        params = self.parseUrl(url, nbrItems, page)
+        params = self.parseUrl(url, nbrItems, page, time)
         url = f"{Urls.VINTED_API_URL}/{Urls.VINTED_PRODUCTS_ENDPOINT}"
 
         try:
@@ -25,13 +25,16 @@ class Items:
             response.raise_for_status()
             items = response.json()
             items = items["items"]
-            return [Item(_item) for _item in items]
+            if not json:
+                return [Item(_item) for _item in items]
+            else:
+                return items
 
         except HTTPError as err:
             raise err
 
 
-    def parseUrl(self, url, nbrItems=20, page=1) -> Dict:
+    def parseUrl(self, url, nbrItems=20, page=1, time=None) -> Dict:
         """
         Parse Vinted search url to get parameters the for api call.
 
@@ -88,6 +91,7 @@ class Items:
             "order": ",".join(
                 map(str, [tpl[1] for tpl in querys if tpl[0] == "order"])
             ),
+            "time": time
         }
 
         return params
