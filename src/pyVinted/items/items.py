@@ -54,25 +54,25 @@ class Items:
                 map(str, [tpl[1] for tpl in querys if tpl[0] == "catalog[]"])
             ),
             "color_ids": ",".join(
-                map(str, [tpl[1] for tpl in querys if tpl[0] == "color_id[]"])
+                map(str, [tpl[1] for tpl in querys if tpl[0] == "color_ids[]"])
             ),
             "brand_ids": ",".join(
-                map(str, [tpl[1] for tpl in querys if tpl[0] == "brand_id[]"])
+                map(str, [tpl[1] for tpl in querys if tpl[0] == "brand_ids[]"])
             ),
             "size_ids": ",".join(
-                map(str, [tpl[1] for tpl in querys if tpl[0] == "size_id[]"])
+                map(str, [tpl[1] for tpl in querys if tpl[0] == "size_ids[]"])
             ),
             "material_ids": ",".join(
-                map(str, [tpl[1] for tpl in querys if tpl[0] == "material_id[]"])
+                map(str, [tpl[1] for tpl in querys if tpl[0] == "material_ids[]"])
             ),
             "status_ids": ",".join(
                 map(str, [tpl[1] for tpl in querys if tpl[0] == "status[]"])
             ),
             "country_ids": ",".join(
-                map(str, [tpl[1] for tpl in querys if tpl[0] == "country_id[]"])
+                map(str, [tpl[1] for tpl in querys if tpl[0] == "country_ids[]"])
             ),
             "city_ids": ",".join(
-                map(str, [tpl[1] for tpl in querys if tpl[0] == "city_id[]"])
+                map(str, [tpl[1] for tpl in querys if tpl[0] == "city_ids[]"])
             ),
             "is_for_swap": ",".join(
                 map(str, [1 for tpl in querys if tpl[0] == "disposal[]"])
