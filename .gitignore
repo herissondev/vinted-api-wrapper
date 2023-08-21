@@ -3,3 +3,6 @@
 .vscode
 testApi.ipynb
 venv/**/*
+build
+dist
+src/pyVinted.egg-info/PKG-INFO
