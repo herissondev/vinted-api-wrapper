@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 import setuptools
 
 
-VERSION = "0.4.9"
+VERSION = "0.4.10"
 DESCRIPTION = "Vinted API wrapper for python"
 
 with open("README.md", "r", encoding="utf-8") as fh:
