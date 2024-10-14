@@ -6,6 +6,7 @@ from typing import List, Dict
 from pyVinted.settings import Urls
 class Items:
 
+
     def search(self, url, nbrItems: int = 20, page: int =1, time: int = None, json: bool = False) -> List[Item]:
         """
         Retrieves items from a given search url on vited.
@@ -17,8 +18,12 @@ class Items:
 
         """
 
+        locale = urlparse(url).netloc
+        requester.setLocale(locale)
+
         params = self.parseUrl(url, nbrItems, page, time)
-        url = f"{Urls.VINTED_API_URL}/{Urls.VINTED_PRODUCTS_ENDPOINT}"
+        #url = f"{Urls.VINTED_API_URL}/{Urls.VINTED_PRODUCTS_ENDPOINT}"
+        url = f"https://{locale}{Urls.VINTED_API_URL}/{Urls.VINTED_PRODUCTS_ENDPOINT}"
 
         try:
             response = requester.get(url=url, params=params)
