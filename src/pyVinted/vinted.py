@@ -4,7 +4,6 @@ from .items.item import Item
 from pyVinted.items import Items
 from pyVinted.requester import requester
 
-
 class Vinted:
     """
     This class is built to connect with the pyVinted API.
@@ -24,5 +23,3 @@ class Vinted:
             requester.session.proxies.update(proxy)
 
         self.items = Items()
-
-
