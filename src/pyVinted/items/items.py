@@ -23,7 +23,7 @@ class Items:
 
         params = self.parseUrl(url, nbrItems, page, time)
         #url = f"{Urls.VINTED_API_URL}/{Urls.VINTED_PRODUCTS_ENDPOINT}"
-        url = f"{urlparse(url).scheme}://{locale}{Urls.VINTED_API_URL}/{Urls.VINTED_PRODUCTS_ENDPOINT}"
+        url = f"https://{locale}{Urls.VINTED_API_URL}/{Urls.VINTED_PRODUCTS_ENDPOINT}"
 
         try:
             response = requester.get(url=url, params=params)
