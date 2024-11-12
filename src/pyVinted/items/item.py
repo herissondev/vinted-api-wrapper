@@ -12,8 +12,8 @@ class Item:
             self.size_title = data["size_title"]
         except:
             self.size_title = data["size_title"]
-        self.currency = data["currency"]
-        self.price = data["price"]
+        self.currency = data["price"]["currency_code"]
+        self.price = data["price"]["amount"]
         self.photo = data["photo"]["url"]
         self.url = data["url"]
         self.created_at_ts = datetime.fromtimestamp(
