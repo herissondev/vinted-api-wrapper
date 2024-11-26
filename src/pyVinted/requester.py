@@ -13,7 +13,7 @@ class Requester:
             "User-Agent": "PostmanRuntime/7.28.4",  # random.choice(USER_AGENTS),
             "Host": "www.vinted.fr",
         }
-        self.VINTED_AUTH_URL = "https://www.vinted.fr/auth/token_refresh"
+        self.VINTED_AUTH_URL = "https://www.vinted.fr/"
         self.MAX_RETRIES = 3
         self.session = requests.Session()
         self.session.headers.update(self.HEADER)
@@ -24,7 +24,7 @@ class Requester:
             Set the locale of the requester.
             :param locale: str
         """
-        self.VINTED_AUTH_URL = f"https://{locale}/auth/token_refresh"
+        self.VINTED_AUTH_URL = f"https://{locale}/"
         self.HEADER = {
             "User-Agent": "PostmanRuntime/7.28.4",  # random.choice(USER_AGENTS),
             "Host": f"{locale}",
@@ -64,7 +64,7 @@ class Requester:
 
         try:
 
-            self.post(self.VINTED_AUTH_URL)
+            self.session.head(self.VINTED_AUTH_URL)
             print("Cookies set!")
 
         except Exception as e:
