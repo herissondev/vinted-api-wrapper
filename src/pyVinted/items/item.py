@@ -1,6 +1,7 @@
 from datetime import datetime, timezone
 from pyVinted.requester import requester
-
+from urllib.parse import urlparse
+from pyVinted.settings import Urls
 
 class Item:
     def __init__(self, data):
@@ -31,3 +32,25 @@ class Item:
         delta = datetime.now(timezone.utc) - self.created_at_ts
         return delta.total_seconds() < minutes * 60
 
+    def getDescription(self, translated=True):
+        locale = urlparse(self.url).netloc
+        requester.setLocale(locale)
+        try:
+            response = requester.get(url=f"https://{locale}{Urls.VINTED_API_URL}/items/{self.id}/plugins/translatable?localize={translated}")
+            response = response.json()
+            return response["plugins"][1]["data"]["description"]
+        except:
+            return None
+
+    def getPhotos(self):
+        locale = urlparse(self.url).netloc
+        requester.setLocale(locale)
+        try:
+            response = requester.get(url=f"https://{locale}{Urls.VINTED_API_URL}/items/{self.id}")
+            response = response.json()
+            urls = set()
+            for photo in response["item"]["photos"]:
+                urls.add(photo["full_size_url"])
+            return urls
+        except:
+            return None
