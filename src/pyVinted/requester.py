@@ -10,7 +10,10 @@ class Requester:
     def __init__(self):
 
         self.HEADER = {
-            "User-Agent": "PostmanRuntime/7.28.4",  # random.choice(USER_AGENTS),
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9",
+            "Referer": "https://www.google.com/",
+            "Connection": "keep-alive",
             "Host": "www.vinted.fr",
         }
         self.VINTED_AUTH_URL = "https://www.vinted.fr/"
@@ -26,7 +29,10 @@ class Requester:
         """
         self.VINTED_AUTH_URL = f"https://{locale}/"
         self.HEADER = {
-            "User-Agent": "PostmanRuntime/7.28.4",  # random.choice(USER_AGENTS),
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9",
+            "Referer": "https://www.google.com/",
+            "Connection": "keep-alive",
             "Host": f"{locale}",
         }
         self.session.headers.update(self.HEADER)
